@@ -26,12 +26,17 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split("=")[1];
-      fs.writeFileSync("Message.html", message)
-      res.statusCode = 302;
-        res.setHeader("Location", "/display");
-        res.end();
-      
-    });
+      fs.writeFile("Message.html", message, (err)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            res.statusCode = 302;
+            res.setHeader("Location", "/display");
+            res.end();
+        }
+      })
+      });
   }
   if (url === "/display") {
     fs.readFile("Message.html", (err, data) => {
