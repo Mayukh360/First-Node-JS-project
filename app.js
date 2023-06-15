@@ -9,9 +9,12 @@ app.use((req,res,next)=>{
 
 app.use((req,res,next)=>{
     console.log('This is next middleware')
+    res.send("<h1>Hello from Express</h1>")
     
 })
 
-const server = http.createServer(app)
+// const server = http.createServer(app)
 
-server.listen(3000);
+// server.listen(3000);
+
+app.listen(3000);
